@@ -9,16 +9,17 @@ pipeline {
     stages {
         stage('Setup AWS Credentials') {
             steps {
-                sh '''
-                mkdir -p ~/.aws
-                echo "[default]" > ~/.aws/credentials
-                echo "aws_access_key_id = $AWS_ACCESS_KEY" >> ~/.aws/credentials
-                echo "aws_secret_access_key = $AWS_SECRET_KEY" >> ~/.aws/credentials
-                chmod 600 ~/.aws/credentials
-                '''
+                withCredentials([usernamePassword(credentialsId: 'AWS_CREDENTIALS', usernameVariable: 'AWS_ACCESS_KEY', passwordVariable: 'AWS_SECRET_KEY')]) {
+                    sh '''
+                    mkdir -p ~/.aws
+                    echo "[default]" > ~/.aws/credentials
+                    echo "aws_access_key_id = $AWS_ACCESS_KEY" >> ~/.aws/credentials
+                    echo "aws_secret_access_key = $AWS_SECRET_KEY" >> ~/.aws/credentials
+                    chmod 600 ~/.aws/credentials
+                    '''
             }
         }
-        
+    }
         stage('Clone Repository') {
             steps {
                 git branch: 'main', url: 'https://github.com/kevalohith/terraform-workspace.git'
