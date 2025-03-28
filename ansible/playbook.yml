@@ -1,27 +1,9 @@
----
 - name: Configure EC2 Instance
   hosts: webserver
   become: yes
   tasks:
-    - name: Update apt packages
+    - name: Update and install packages
       apt:
         update_cache: yes
-
-    - name: Install required packages (Nginx, Java, etc.)
-      apt:
-        name:
-          - nginx
-          - openjdk-11-jdk
+        name: ["git", "vim"]
         state: present
-
-    - name: Start and enable Nginx
-      service:
-        name: nginx
-        state: started
-        enabled: yes
-
-    - name: Create a sample index.html
-      copy:
-        content: "<h1>Welcome to Terraform & Ansible Automation!</h1>"
-        dest: /var/www/html/index.html
-
