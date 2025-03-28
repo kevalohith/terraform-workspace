@@ -39,7 +39,6 @@ pipeline {
         }
         stage('Fetch Public IP & Create Inventory') {
             steps {
-                script {
                     def public_ip = sh(script: "terraform output -json | jq -r '.public_ip'", returnStdout: true).trim()
                     writeFile file: 'ansible/inventory', text: "[webserver]\n${public_ip} ansible_user=ubuntu"
                     
@@ -55,4 +54,3 @@ pipeline {
         }
     }
 }
-
