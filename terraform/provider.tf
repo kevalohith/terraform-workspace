@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket         = "terraform-state-kevalohith"
+    bucket         = "kevloh-bucket"
     key            = "terraform.tfstate"
     region         = "us-east-1"
     dynamodb_table = "terraform-lock"
@@ -11,4 +11,3 @@ terraform {
 provider "aws" {
   region = var.aws_region
 }
-
