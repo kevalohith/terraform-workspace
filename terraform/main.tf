@@ -1,21 +1,9 @@
-# Fetch the current workspace
-locals {
-  workspace_name = terraform.workspace
-}
-
-# Create an S3 Bucket with a unique name
-resource "aws_s3_bucket" "bucket" {
-  bucket = "${local.workspace_name}-kevloh-bucket"
-  acl    = "private"
-}
-
-# Create an EC2 instance
 resource "aws_instance" "web" {
-  ami           = "ami-071226ecf16aa7d96"  # Amazon Linux 2 AMI (Change as per region)
-  instance_type = lookup(var.instance_type, local.workspace_name, "t2.micro")
+  ami           = "ami-084568db4383264d4" # Amazon Linux 2 AMI (update as needed)
+  instance_type = "t2.micro"
+  key_name      = "usa-east" # Update with your key pair
 
   tags = {
-    Name = "${local.workspace_name}-kl"
+    Name = "Jenkins-Provisioned-EC2"
   }
 }
-
