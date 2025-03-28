@@ -40,7 +40,7 @@ pipeline {
         stage('Fetch Public IP & Create Inventory') {
             steps {
                 script {
-                    def public_ip = sh(script: "terraform output -json | jq -r '.public_ip'", returnStdout: true).trim()
+                    def public_ip = sh(script: "terraform output -raw public_ip", returnStdout: true).trim()
                     if (!public_ip || public_ip == "null") {
                         error "Failed to fetch public IP. Check Terraform output."
                     }
