@@ -30,6 +30,7 @@ pipeline {
                 dir('terraform') {
                     sh '''
                     terraform init
+                    terraform apply -auto-approve -var="environment=${WORKSPACE}"
                     terraform workspace select $ENVIRONMENT || terraform workspace new $ENVIRONMENT
                     terraform apply -auto-approve
                     '''
