@@ -4,6 +4,6 @@ resource "aws_instance" "web" {
   key_name      = "usa-east" # Update with your key pair
 
   tags = {
-    Name = "Jenkins-Provisioned-EC2"
+    Name = "Jenkins-EC2"
   }
 }
