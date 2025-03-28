@@ -7,7 +7,9 @@ variable "aws_region" {
 variable "environment" {
   description = "Deployment environment (dev, staging, prod)"
   type        = string
+  default     = "dev"
 }
+
 
 variable "instance_type" {
   description = "EC2 instance type based on environment"
