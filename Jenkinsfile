@@ -18,9 +18,10 @@ pipeline {
                 '''
             }
         }
+        
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/kevalohith/terraform-workspace.git'
+                git branch: 'main', url: 'https://github.com/kevalohith/terraform-workspace.git'
             }
         }
         stage('Terraform Init & Apply') {
